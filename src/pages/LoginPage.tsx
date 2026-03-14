@@ -39,10 +39,7 @@ const LoginPage = () => {
       <div className="flex flex-1 flex-col items-center justify-center px-6 py-12">
         {/* Logo */}
         <div className="mb-8 flex flex-col items-center gap-2 animate-fade-in">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary">
-            <Leaf className="h-8 w-8 text-primary-foreground" />
-          </div>
-          <h1 className="font-display text-3xl font-bold text-foreground">GeoFeed</h1>
+          <img src={geoFeedLogo} alt="GeoFeed Logo" className="h-28 w-28 rounded-2xl object-contain" />
           <p className="text-sm text-muted-foreground">Feed strays. Build community.</p>
         </div>
 
