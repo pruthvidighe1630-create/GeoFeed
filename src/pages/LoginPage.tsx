@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Leaf } from "lucide-react";
+import { MapPin } from "lucide-react";
+import geoFeedLogo from "@/assets/geofeed-logo.jpeg";
 
 const LoginPage = () => {
   const navigate = useNavigate();
