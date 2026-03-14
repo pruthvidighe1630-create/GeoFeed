@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { MapPin, Heart, AlertTriangle, UtensilsCrossed } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import AppHeader from "@/components/AppHeader";
 
 const GeneralDashboard = () => {
   const { user } = useAuth();
@@ -9,13 +10,9 @@ const GeneralDashboard = () => {
 
   return (
     <div className="animate-fade-in">
-      <div className="bg-primary px-4 pb-6 pt-8">
-        <p className="text-sm text-primary-foreground/70">Welcome,</p>
-        <h1 className="font-display text-2xl font-bold text-primary-foreground">{user?.name || "User"}</h1>
-      </div>
+      <AppHeader subtitle="Welcome," title={user?.name || "User"} />
 
       <div className="px-4 -mt-4 space-y-4">
-        {/* Quick Actions */}
         <div className="grid grid-cols-2 gap-3">
           {[
             { icon: MapPin, label: "Feeding Zones", desc: "Find nearby zones", path: "/map", color: "bg-primary/10 text-primary" },

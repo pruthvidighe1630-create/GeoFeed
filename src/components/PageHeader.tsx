@@ -1,5 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import geoFeedLogo from "@/assets/geofeed-logo.jpeg";
 
 interface PageHeaderProps {
   title: string;
@@ -17,6 +18,7 @@ const PageHeader = ({ title, showBack = false, action }: PageHeaderProps) => {
             <ArrowLeft className="h-5 w-5" />
           </button>
         )}
+        <img src={geoFeedLogo} alt="GeoFeed" className="h-8 w-8 rounded-lg object-contain" />
         <h1 className="font-display text-lg font-semibold">{title}</h1>
       </div>
       {action}

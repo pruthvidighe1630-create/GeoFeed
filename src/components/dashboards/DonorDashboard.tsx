@@ -5,6 +5,7 @@ import { Plus, MapPin, Heart, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatusBadge from "@/components/StatusBadge";
 import StatusStepper from "@/components/StatusStepper";
+import AppHeader from "@/components/AppHeader";
 
 const DonorDashboard = () => {
   const { user } = useAuth();
@@ -13,15 +14,11 @@ const DonorDashboard = () => {
 
   return (
     <div className="animate-fade-in">
-      {/* Header */}
-      <div className="bg-primary px-4 pb-6 pt-8">
-        <p className="text-sm text-primary-foreground/70">Welcome back,</p>
-        <h1 className="font-display text-2xl font-bold text-primary-foreground">{user?.name || "Donor"}</h1>
+      <AppHeader subtitle="Welcome back," title={user?.name || "Donor"}>
         <p className="mt-1 text-xs text-primary-foreground/60">{user?.location}</p>
-      </div>
+      </AppHeader>
 
       <div className="px-4 -mt-4 space-y-4">
-        {/* Quick Donate */}
         <Button
           onClick={() => navigate("/donate")}
           className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-display font-semibold text-base py-6 rounded-xl shadow-lg"
@@ -29,7 +26,6 @@ const DonorDashboard = () => {
           <Plus className="mr-2 h-5 w-5" /> Quick Donate Food
         </Button>
 
-        {/* Quick Actions */}
         <div className="grid grid-cols-3 gap-3">
           {[
             { icon: MapPin, label: "Feeding Zones", path: "/map" },
@@ -47,7 +43,6 @@ const DonorDashboard = () => {
           ))}
         </div>
 
-        {/* My Donations */}
         <div>
           <h2 className="font-display text-lg font-semibold mb-3">My Donations</h2>
           <div className="space-y-3">
