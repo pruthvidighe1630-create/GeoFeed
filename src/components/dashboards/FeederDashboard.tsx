@@ -6,6 +6,7 @@ import { MapPin, Navigation, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatusBadge from "@/components/StatusBadge";
 import { toast } from "sonner";
+import AppHeader from "@/components/AppHeader";
 
 const FeederDashboard = () => {
   const { user } = useAuth();
@@ -13,23 +14,15 @@ const FeederDashboard = () => {
   const [donations, setDonations] = useState<FoodDonation[]>(mockDonations);
 
   const handleAccept = (id: string) => {
-    setDonations((prev) =>
-      prev.map((d) => (d.id === id ? { ...d, status: "Accepted" as const } : d))
-    );
+    setDonations((prev) => prev.map((d) => (d.id === id ? { ...d, status: "Accepted" as const } : d)));
     toast.success("Task accepted! Navigate to pickup location.");
   };
-
   const handleCollect = (id: string) => {
-    setDonations((prev) =>
-      prev.map((d) => (d.id === id ? { ...d, status: "Collected" as const } : d))
-    );
+    setDonations((prev) => prev.map((d) => (d.id === id ? { ...d, status: "Collected" as const } : d)));
     toast.success("Food collected! Head to the feeding zone.");
   };
-
   const handleFed = (id: string) => {
-    setDonations((prev) =>
-      prev.map((d) => (d.id === id ? { ...d, status: "Fed" as const } : d))
-    );
+    setDonations((prev) => prev.map((d) => (d.id === id ? { ...d, status: "Fed" as const } : d)));
     toast.success("🎉 Animals fed! Thank you for your kindness.");
   };
 
@@ -39,31 +32,26 @@ const FeederDashboard = () => {
 
   return (
     <div className="animate-fade-in">
-      <div className="bg-primary px-4 pb-6 pt-8">
-        <p className="text-sm text-primary-foreground/70">Feeder Dashboard</p>
-        <h1 className="font-display text-2xl font-bold text-primary-foreground">{user?.name || "Feeder"}</h1>
+      <AppHeader subtitle="Feeder Dashboard" title={user?.name || "Feeder"}>
         <div className="mt-3 flex gap-3">
-          <div className="rounded-lg bg-primary-foreground/10 px-3 py-1.5 text-center">
-            <p className="text-lg font-bold text-primary-foreground">{pending.length}</p>
-            <p className="text-[10px] text-primary-foreground/70">Available</p>
-          </div>
-          <div className="rounded-lg bg-primary-foreground/10 px-3 py-1.5 text-center">
-            <p className="text-lg font-bold text-primary-foreground">{active.length}</p>
-            <p className="text-[10px] text-primary-foreground/70">Active</p>
-          </div>
-          <div className="rounded-lg bg-primary-foreground/10 px-3 py-1.5 text-center">
-            <p className="text-lg font-bold text-primary-foreground">{completed.length}</p>
-            <p className="text-[10px] text-primary-foreground/70">Completed</p>
-          </div>
+          {[
+            { value: pending.length, label: "Available" },
+            { value: active.length, label: "Active" },
+            { value: completed.length, label: "Completed" },
+          ].map((s) => (
+            <div key={s.label} className="rounded-lg bg-primary-foreground/10 px-3 py-1.5 text-center">
+              <p className="text-lg font-bold text-primary-foreground">{s.value}</p>
+              <p className="text-[10px] text-primary-foreground/70">{s.label}</p>
+            </div>
+          ))}
         </div>
-      </div>
+      </AppHeader>
 
       <div className="px-4 -mt-4 space-y-4">
         <Button onClick={() => navigate("/map")} className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-display font-semibold py-5 rounded-xl">
           <Navigation className="mr-2 h-4 w-4" /> View Feeding Zones Map
         </Button>
 
-        {/* Available Pickups */}
         {pending.length > 0 && (
           <div>
             <h2 className="font-display text-lg font-semibold mb-3">Available Pickups</h2>
@@ -80,16 +68,13 @@ const FeederDashboard = () => {
                   <p className="text-xs text-muted-foreground flex items-center gap-1">
                     <MapPin className="h-3 w-3" /> {d.pickupLocation} · {d.time}
                   </p>
-                  <Button size="sm" onClick={() => handleAccept(d.id)} className="w-full bg-primary text-primary-foreground">
-                    Accept Pickup
-                  </Button>
+                  <Button size="sm" onClick={() => handleAccept(d.id)} className="w-full bg-primary text-primary-foreground">Accept Pickup</Button>
                 </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* Active Tasks */}
         {active.length > 0 && (
           <div>
             <h2 className="font-display text-lg font-semibold mb-3">Active Tasks</h2>
